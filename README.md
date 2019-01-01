@@ -23,6 +23,10 @@ pandas
 random
 ```
 
+In terms of the input images, make sure that all of your background images are
+of the same dimensions and all your detection images are of the same dimensions
+(and smaller than the background image dimensions).
+
 ### Usage
 
 On the command-line, navigate to a directory where you would like to place the
