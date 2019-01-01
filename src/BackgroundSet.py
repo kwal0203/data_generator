@@ -17,9 +17,3 @@ class BackgroundSet:
             open_image = Background(filename, Image.open(image_path, 'r'))
             self.background_images.append(open_image)
             self.number_of_backgrounds += 1
-
-    def iterate_backgrounds(self):
-        for background in self.background_images:
-            print("Name on object: ", background.name)
-            print("Image width:    ", background.width)
-            print("Image height:   ", background.height)

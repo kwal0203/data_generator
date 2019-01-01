@@ -23,12 +23,10 @@ if __name__ == '__main__':
     # 2. Read detection images
     image_set = ImageSet(opts.image_dir)
     image_set.make_image_set()
-    image_set.iterate_detect_images()
 
     # 3. Read background images
     background_set = BackgroundSet(opts.background_dir)
     background_set.make_background_set()
-    background_set.iterate_backgrounds()
 
     # 4. Pass detection and background images to DataGenerator
     data_generator = DataGenerator(image_set, background_set, opts.samples,

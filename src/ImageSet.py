@@ -17,9 +17,3 @@ class ImageSet:
             open_image = DetectImage(filename, Image.open(image_path, 'r'))
             self.detection_images.append(open_image)
             self.number_of_images += 1
-
-    def iterate_detect_images(self):
-        for detect_image in self.detection_images:
-            print("Name on object: ", detect_image.name)
-            print("Image width:    ", detect_image.width)
-            print("Image height:   ", detect_image.height)
