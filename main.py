@@ -12,14 +12,13 @@ if __name__ == '__main__':
     parser.add_option("-b", "--backgrounds", dest="background_dir",
                       help=("the format used for outputting numbers "
                             "[default: %default]"))
-    parser.set_defaults(image_dir="None", background_dir="None")
+    parser.add_option("-s", "--samples", dest="samples", type="int",
+                      help="Total number of samples to be created")
+    parser.add_option("-p", "--cutoff", dest="cutoff", type="float",
+                      help="percentage of images in training set")
+    parser.set_defaults(image_dir="None", background_dir="None", samples=2,
+                        cutoff=0.8)
     opts, args = parser.parse_args()
-
-    print("----- ARG TESTING -----")
-    print("Detect dir:     ", opts.image_dir)
-    print("Background dir: ", opts.background_dir)
-    print("----- END ARG TESTING -----")
-    print("\n")
 
     # 2. Read detection images
     image_set = ImageSet(opts.image_dir)
@@ -32,8 +31,10 @@ if __name__ == '__main__':
     background_set.iterate_backgrounds()
 
     # 4. Pass detection and background images to DataGenerator
-    # data_generator = DataGenerator(image_set, background_set)
-    # data_generator.process_images()
+    data_generator = DataGenerator(image_set, background_set, opts.samples,
+                                   opts.cutoff)
+    data_generator.process_images()
+    data_generator.generate_csv()
 
     # 5. Finish
     print("Program successfully finished")
