@@ -35,7 +35,7 @@ application.
 Type the following command:
 
 ```
-git clone https://github.com/kwal0203/data_generator.git.
+git clone https://github.com/kwal0203/data_generator.git
 ```
 
 Create the following two directories inside the data_generator folder:
