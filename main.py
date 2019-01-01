@@ -20,14 +20,6 @@ if __name__ == '__main__':
                         cutoff=0.8)
     opts, args = parser.parse_args()
 
-    print("----- ARG TESTING -----")
-    print("Detect dir:       ", opts.image_dir)
-    print("Background dir:   ", opts.background_dir)
-    print("No. of samples:   ", opts.samples)
-    print("Percent training: ", opts.cutoff)
-    print("----- END ARG TESTING -----")
-    print("\n")
-
     # 2. Read detection images
     image_set = ImageSet(opts.image_dir)
     image_set.make_image_set()
@@ -42,6 +34,7 @@ if __name__ == '__main__':
     data_generator = DataGenerator(image_set, background_set, opts.samples,
                                    opts.cutoff)
     data_generator.process_images()
+    data_generator.generate_csv()
 
     # 5. Finish
     print("Program successfully finished")

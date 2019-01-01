@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 
 from random import randint
 
@@ -11,7 +12,6 @@ class DataGenerator:
         self.image_set = image_set
         self.background_set = background_set
         self.num_samples = num_samples
-        self.detail_list = []
         self.csv_lines = []
         self.cutoff = cutoff * num_samples
 
@@ -46,9 +46,10 @@ class DataGenerator:
                     y_min = offset[1]
                     x_max = x_min + image.width
                     y_max = y_min + image.height
-                    self.detail_list.append((new_name, tmp_back.width,
-                                             tmp_back.height, 'XXX', x_min,
-                                             y_min, x_max, y_max))
+                    class_name = image.name[0:-4]
+                    self.csv_lines.append((new_name, tmp_back.width,
+                                             tmp_back.height, class_name,
+                                             x_min, y_min, x_max, y_max))
 
                 # Name and save the new image (background image remains
                 # unchanged)
@@ -59,3 +60,16 @@ class DataGenerator:
                 else:
                     tmp_back.save("output/test/" + new_name)
                 sample_no += 1
+
+    def generate_csv(self):
+        tmp_cutoff = int(self.cutoff)
+
+        train_list = self.csv_lines[0:tmp_cutoff]
+        test_list = self.csv_lines[tmp_cutoff:self.num_samples]
+
+        column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
+        train_df = pd.DataFrame(train_list, columns=column_name)
+        test_df = pd.DataFrame(test_list, columns=column_name)
+
+        train_df.to_csv('output/train_labels.csv', index=None)
+        test_df.to_csv('output/test_labels.csv', index=None)
