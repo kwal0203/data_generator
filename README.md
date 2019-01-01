@@ -23,8 +23,15 @@ pandas
 random
 ```
 
+You will need an image of the object you want the trained model to detect and
+a set of random images to serve as backgrounds. The application will paste the
+object image in a random location on the backgrounds that you place in the
+'backgrounds' directory (explained below). Doing this process repeatedly
+(with any number of object and background images) is how the data-sets are
+created. 
+
 In terms of the input images, make sure that all of your background images are
-of the same dimensions and all your detection images are of the same dimensions
+of the same dimensions and all your object images are of the same dimensions
 (and smaller than the background image dimensions).
 
 ### Usage
