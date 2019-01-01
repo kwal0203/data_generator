@@ -1,7 +1,7 @@
 import optparse
-from ImageSet import ImageSet
-from BackgroundSet import BackgroundSet
-from DataGenerator import DataGenerator
+from src.ImageSet import ImageSet
+from src.BackgroundSet import BackgroundSet
+from src.DataGenerator import DataGenerator
 
 if __name__ == '__main__':
     # 1. Read command line arguments
@@ -16,7 +16,7 @@ if __name__ == '__main__':
                       help="Total number of samples to be created")
     parser.add_option("-p", "--cutoff", dest="cutoff", type="float",
                       help="percentage of images in training set")
-    parser.set_defaults(image_dir="None", background_dir="None", samples=2,
+    parser.set_defaults(image_dir="images/", background_dir="backgrounds/", samples=2,
                         cutoff=0.8)
     opts, args = parser.parse_args()
 

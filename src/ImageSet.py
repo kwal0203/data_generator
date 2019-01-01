@@ -1,6 +1,6 @@
 import os
 
-from DetectImage import DetectImage
+from src.DetectImage import DetectImage
 from PIL import Image
 
 # Class that represents the whole set of detection images in the application

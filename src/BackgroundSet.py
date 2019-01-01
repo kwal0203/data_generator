@@ -1,6 +1,6 @@
 import os
 
-from Background import Background
+from src.Background import Background
 from PIL import Image
 
 # Class that represents the whole set of background images in the application

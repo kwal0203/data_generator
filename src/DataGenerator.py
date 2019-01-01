@@ -12,8 +12,10 @@ class DataGenerator:
         self.image_set = image_set
         self.background_set = background_set
         self.num_samples = num_samples
-        self.csv_lines = []
-        self.cutoff = cutoff * num_samples
+        self.train_csv_lines = []
+        self.test_csv_lines = []
+        self.cutoff = cutoff * background_set.number_of_backgrounds *\
+                      num_samples
 
     def process_images(self):
         print("----- PROCESSING IMAGES -----")
@@ -47,27 +49,32 @@ class DataGenerator:
                     x_max = x_min + image.width
                     y_max = y_min + image.height
                     class_name = image.name[0:-4]
-                    self.csv_lines.append((new_name, tmp_back.width,
-                                             tmp_back.height, class_name,
-                                             x_min, y_min, x_max, y_max))
+                    if sample_no <= self.cutoff:
+                        self.train_csv_lines.append(
+                            (new_name, tmp_back.width, tmp_back.height,
+                             class_name, x_min, y_min, x_max, y_max))
+                    else:
+                        self.test_csv_lines.append(
+                            (new_name, tmp_back.width, tmp_back.height,
+                             class_name, x_min, y_min, x_max, y_max))
 
                 # Name and save the new image (background image remains
                 # unchanged)
                 print("Processing Sample ", sample_no)
 
+                # if sample_no <= self.cutoff:
                 if sample_no <= self.cutoff:
-                    tmp_back.save("output/train/" + new_name)
+                        tmp_back.save("output/train/" + new_name)
                 else:
                     tmp_back.save("output/test/" + new_name)
                 sample_no += 1
 
     def generate_csv(self):
-        tmp_cutoff = int(self.cutoff)
+        train_list = self.train_csv_lines
+        test_list = self.test_csv_lines
 
-        train_list = self.csv_lines[0:tmp_cutoff]
-        test_list = self.csv_lines[tmp_cutoff:self.num_samples]
-
-        column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
+        column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin',
+                       'xmax', 'ymax']
         train_df = pd.DataFrame(train_list, columns=column_name)
         test_df = pd.DataFrame(test_list, columns=column_name)
 
