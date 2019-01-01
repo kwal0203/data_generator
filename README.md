@@ -38,7 +38,7 @@ Type the following command:
 git clone https://github.com/kwal0203/data_generator.git
 ```
 
-Create the following two directories inside the data_generator folder:
+Create the following two directories inside the 'data_generator' folder:
 
 ```
 images
@@ -50,17 +50,17 @@ the model to detect.
 
 Fill the 'backgrounds' folder with random images to be used as backgrounds while
 training the model. The objects in the 'images' directory will be randomly
-pasted onto these backgrounds to create the training/test data-sets.
+pasted onto these backgrounds to create the data-sets.
 
 Decide how many times you would like to re-use each background (NUMBER) and
-type the following command:
+type the following command to run the application:
 
 ```
 python3 main.py -s NUMBER
 ```
 
 A new directory called output will be created containing training and test
-data-sets in separate folders. CSV files that corresponding to these data-sets
+data-sets in separate folders. CSV files that correspond to these data-sets
 will also be created. The CSV files can be converted into TFRecords for use in
 the TensorFlow Object Detection API. 
 
